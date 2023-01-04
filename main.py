@@ -12,7 +12,7 @@ available_endpoints = {
         'Lección 3': 'https://besvc.capacitateparaelempleo.org/api/Tests/es/a0511bcb-678d-4e1e-bab9-9013fbfddfeb/View'
     },
     'Nivel 3': {
-        'Lección 1': 'https://besvc.capacitateparaelempleo.org/api/Tests/es/a0511bcb-678d-4e1e-bab9-9013fbfddfeb/View'
+        'Lección 1': 'https://besvc.capacitateparaelempleo.org/api/Tests/es/f5b7caaa-38b4-4fcb-9225-830408aae218/View'
     },
     'Nivel 4': {
         'Lección 1': 'https://besvc.capacitateparaelempleo.org/api/Tests/es/be8db28e-7519-41c5-b985-74c9f15b19c5/View'
