@@ -3,18 +3,19 @@ import json
 
 available_endpoints = {
     'Nivel 1': {
-        'Lección 1': 'https://besvc.capacitateparaelempleo.org/api/Tests/es/3e451f9e-0799-45a2-aba2-6900a079ea16/View',
-        'Lección 2': 'https://besvc.capacitateparaelempleo.org/api/Tests/es/bfe7bb44-3891-4156-9d53-4898311a31fd/View'
+        'Lección 1': 'https://besvc.capacitateparaelempleo.org/api/Tests/es/435cb895-ded7-4965-8798-9740c3ac589a/View',
+        'Lección 2': 'https://besvc.capacitateparaelempleo.org/api/Tests/es/c9cbafb5-96d9-4254-87ea-7017a37ec8c7/View'
     },
     'Nivel 2': {
-        'Lección 1': 'https://besvc.capacitateparaelempleo.org/api/Tests/es/b885b619-69b4-4006-be25-cdb753331e0d/View',
-        'Lección 2': 'https://besvc.capacitateparaelempleo.org/api/Tests/es/f7151aa7-34d8-4fa4-98ca-9cbbb7bc26bf/View'
+        'Lección 1': 'https://besvc.capacitateparaelempleo.org/api/Tests/es/f8d30a8c-3f00-4475-ac5b-ba9d793eb081/View',
+        'Lección 2': 'https://besvc.capacitateparaelempleo.org/api/Tests/es/0f982feb-2952-4bfb-ba60-09ad014b10ea/View',
+        'Lección 3': 'https://besvc.capacitateparaelempleo.org/api/Tests/es/a0511bcb-678d-4e1e-bab9-9013fbfddfeb/View'
     },
     'Nivel 3': {
-        'Lección 1': 'https://besvc.capacitateparaelempleo.org/api/Tests/es/076a25e5-5b44-4b7a-b3e2-9ec79ce49c09/View'
+        'Lección 1': 'https://besvc.capacitateparaelempleo.org/api/Tests/es/a0511bcb-678d-4e1e-bab9-9013fbfddfeb/View'
     },
     'Nivel 4': {
-        'Lección 1': 'https://besvc.capacitateparaelempleo.org/api/Tests/es/f97b35ae-635b-4748-9530-a8e97b5d28a9/View'
+        'Lección 1': 'https://besvc.capacitateparaelempleo.org/api/Tests/es/be8db28e-7519-41c5-b985-74c9f15b19c5/View'
     }
 }
 
@@ -25,6 +26,7 @@ def getQuestions(endpoint):
         return json.loads(response.text)
     else:
         print(f'Error al obtener las preguntas {response.status_code}')
+        input("\nPresione Enter...")
         exit()
 
 
@@ -39,13 +41,16 @@ def menu():
             nivel = int(input('Selecciona el nivel: '))-1
             if nivel < 0 or nivel > len(levels):
                 print('Opción no válida')
+                input("\nPresione Enter...")
                 continue
             print(f'\n\nHas seleccionado el nivel {levels[nivel]}\n\n')
         except KeyboardInterrupt:
             print('Saliendo...')
+            input("\nPresione Enter...")
             exit()
         except:
             print('Opción no válida')
+            input("\nPresione Enter...")
             continue
         break
     while True:
@@ -71,7 +76,8 @@ def questionParser(question):
     if (question['questionTypeId'] == 1):  # Unica respuesta
         respuesta = f"-> {question['answerOptions'][0]['answerText']}"
     elif (question['questionTypeId'] == 2):  # Multiple respuesta
-        respuesta = f"1.- {question['answerOptions'][0]['answerText']}\n2.- {question['answerOptions'][1]['answerText']}"
+        for answer in question['answerOptions']:
+            respuesta += f"-> {answer['answerText']}\n"
     elif (question['questionTypeId'] == 3):  # Ordenar
         for i, answer in enumerate(question['answerOptions']):
             respuesta += f"{i+1}.- {answer['answerText']}\n"
@@ -91,3 +97,4 @@ def main():
 
 
 main()
+input("\nPresione Enter para salir...")
